@@ -2,11 +2,18 @@
 
 Snatch-It is a modern e-commerce web application with a public storefront and a secure admin dashboard for managing products, orders, media, and content. Built using React and Spring Boot, it offers flexibility, performance, and a clean UI/UX.
 
-## Access the Application
+---
 
-https://snatch-it-frontend.vercel.app
+##  Access the Application
 
-## Features
+[https://snatch-it-frontend.vercel.app](https://snatch-it-frontend.vercel.app)
+
+---
+
+## Clone Backend
+https://github.com/Darweeshy/Ecom_Backend
+
+##  Features
 
 ### Admin Dashboard
 - Secure login with JWT authentication
@@ -26,11 +33,13 @@ https://snatch-it-frontend.vercel.app
 - Track order status using a tracking number
 - Reset forgotten passwords via email
 
-## Tech Stack
+---
+
+##  Tech Stack
 
 ### Backend
 - Java 21
-- Spring Boot 3.x
+- Spring Boot 3.5
 - Spring Security with JWT
 - Spring Data JPA (Hibernate)
 - PostgreSQL
@@ -46,7 +55,9 @@ https://snatch-it-frontend.vercel.app
 - Frontend: Vercel
 - Database: Supabase (PostgreSQL)
 
-## Getting Started (Development Setup)
+---
+
+##  Getting Started (Development Setup)
 
 ### Requirements
 - Java 21
@@ -54,7 +65,9 @@ https://snatch-it-frontend.vercel.app
 - PostgreSQL
 - Maven
 
-### Backend Setup
+---
+
+###  Backend Setup
 
 1. Clone the backend repository.
 2. Create a file at `src/main/resources/application-local.properties` with your local config:
@@ -68,29 +81,23 @@ PAYMOB_API_KEY=your_paymob_api_key
 PAYMOB_INTEGRATION_ID=your_paymob_integration_id
 PAYMOB_HMAC_SECRET=your_paymob_hmac_secret
 
-arduino
-Copy
-Edit
 
 3. Start the backend server:
 
 ```bash
 ./mvnw spring-boot:run
-App will be running at http://localhost:8080.
+App will be running at: http://localhost:8080
 
 Frontend Setup
-Clone the frontend repository.
+Clone this frontend repository.
 
 Navigate to the project directory and install dependencies:
 
-bash
-Copy
-Edit
-npm install
-Create a .env.local file in the root directory with the following content:
 
-ini
-Copy
+npm install
+Create a .env.local file in the root directory:
+
+=
 Edit
 VITE_API_BASE_URL=http://localhost:8080
 VITE_PAYMOB_IFRAME_ID=your_paymob_iframe_id
@@ -100,14 +107,12 @@ bash
 Copy
 Edit
 npm run dev
-Frontend will be running at http://localhost:5173.
+Frontend will be available at: http://localhost:5173
 
-Admin Access
+🔐 Admin Access
 To test the admin dashboard, you can log in with:
 
-makefile
-Copy
-Edit
+
 Username: ali1
 Password: ali1
 You can change the password or role later in the database.
