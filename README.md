@@ -1,100 +1,95 @@
 # Snatch-It — Full-Stack E-Commerce Platform
 
-Snatch-It is a modern e-commerce web app with a public storefront and an admin dashboard for managing products, orders, content, and media. Built with React and Spring Boot, it's designed for both performance and flexibility.
+Snatch-It is a modern e-commerce web application with a public storefront and a secure admin dashboard for managing products, orders, media, and content. Built using React and Spring Boot, it offers flexibility, performance, and a clean UI/UX.
 
 ## Access the Application
 
-- [https://snatch-it-frontend.vercel.app](https://snatch-it-frontend.vercel.app)
+https://snatch-it-frontend.vercel.app
 
 ## Features
 
 ### Admin Dashboard
-
 - Secure login with JWT authentication
-- Product management with variants (color, size, price, stock)
-- Category management with image support and nested structure
-- Order management with live status updates
-- Media library with folder-based image management
-- Discount coupons (percentage or fixed amount)
-- CMS for static pages like About and Privacy Policy
-- Dashboard overview with key store metrics
+- Add, edit, and delete products with support for variants (color, size, price, stock)
+- Manage categories with image upload and nested structure
+- View and update customer orders with live status tracking
+- Upload and organize images in folders using the media library
+- Create and manage discount coupons (fixed or percentage-based)
+- Manage static content pages (e.g., About Us, Privacy Policy)
+- Dashboard overview with key store metrics like revenue and stock levels
 
 ### Storefront
-
-- Browse products by category with filters
-- Add to cart, checkout, and track orders
-- Guest checkout and registered user accounts
-- Online payment (Paymob) and Cash on Delivery
-- Password reset via email
+- Browse products by category and apply filters (e.g., price, brand)
+- Add products to cart and proceed to checkout
+- Support for guest checkout and registered user accounts
+- Pay using Cash on Delivery or online via Paymob
+- Track order status using a tracking number
+- Reset forgotten passwords via email
 
 ## Tech Stack
 
 ### Backend
-
 - Java 21
 - Spring Boot 3.x
-- Spring Security (JWT)
-- JPA (Hibernate)
+- Spring Security with JWT
+- Spring Data JPA (Hibernate)
 - PostgreSQL
 
 ### Frontend
-
 - React (Vite)
 - React Router
 - Axios
 - Tailwind CSS
 
 ### Deployment
-
 - Backend: Render (Docker)
 - Frontend: Vercel
 - Database: Supabase (PostgreSQL)
 
----
-
-## Getting Started (Dev Setup)
+## Getting Started (Development Setup)
 
 ### Requirements
-
 - Java 21
 - Node.js v18+
 - PostgreSQL
 - Maven
 
-### Backend
+### Backend Setup
 
-1. Clone the backend repo
-2. Create a file at `src/main/resources/application-local.properties` with:
+1. Clone the backend repository.
+2. Create a file at `src/main/resources/application-local.properties` with your local config:
 
-   ```properties
-   DB_URL=jdbc:postgresql://localhost:5432/your_db_name
-   DB_USERNAME=your_user
-   DB_PASSWORD=your_password
-   JWT_SECRET=your-secret
-   SENDGRID_API_KEY=your_sendgrid_api_key
-   PAYMOB_API_KEY=your_paymob_api_key
-   PAYMOB_INTEGRATION_ID=your_paymob_integration_id
-   PAYMOB_HMAC_SECRET=your_paymob_hmac_secret
-Start the server:
+DB_URL=jdbc:postgresql://localhost:5432/your_db_name
+DB_USERNAME=your_user
+DB_PASSWORD=your_password
+JWT_SECRET=your_secret
+SENDGRID_API_KEY=your_sendgrid_api_key
+PAYMOB_API_KEY=your_paymob_api_key
+PAYMOB_INTEGRATION_ID=your_paymob_integration_id
+PAYMOB_HMAC_SECRET=your_paymob_hmac_secret
 
-bash
+arduino
 Copy
 Edit
+
+3. Start the backend server:
+
+```bash
 ./mvnw spring-boot:run
-App will be running on http://localhost:8080
+App will be running at http://localhost:8080.
 
-Frontend
-Clone the frontend repo
+Frontend Setup
+Clone the frontend repository.
 
-Install dependencies:
+Navigate to the project directory and install dependencies:
 
 bash
 Copy
 Edit
 npm install
-Create a .env.local file:
+Create a .env.local file in the root directory with the following content:
 
-env
+ini
 Copy
 Edit
 VITE_API_BASE_URL=http://localhost:8080
@@ -105,12 +100,14 @@ bash
 Copy
 Edit
 npm run dev
-Visit http://localhost:5173
+Frontend will be running at http://localhost:5173.
 
 Admin Access
-To test the admin panel:
+To test the admin dashboard, you can log in with:
 
+makefile
+Copy
+Edit
 Username: ali1
-
 Password: ali1
-
+You can change the password or role later in the database.
