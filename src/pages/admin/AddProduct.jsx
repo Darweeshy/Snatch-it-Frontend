@@ -47,7 +47,7 @@ const AddProduct = () => {
         };
         fetchCategories();
     }, []);
-    
+
     const handleProductChange = (e) => {
         setProduct({ ...product, [e.target.name]: e.target.value });
     };
@@ -70,8 +70,9 @@ const AddProduct = () => {
         const updatedVariants = [...variants];
         const variantToUpdate = { ...updatedVariants[activeVariantIndex] };
 
-        variantToUpdate.imageUrl = file.imageUrl;
-        variantToUpdate.clientImageUrl = `${import.meta.env.VITE_API_BASE_URL}${file.imageUrl}`;
+        // MediaFile entity uses 'url' field, not 'imageUrl'
+        variantToUpdate.imageUrl = file.url;
+        variantToUpdate.clientImageUrl = `${import.meta.env.VITE_API_BASE_URL}${file.url}`;
         variantToUpdate.image = null; // Clear file input if media is chosen
 
         updatedVariants[activeVariantIndex] = variantToUpdate;
@@ -110,12 +111,12 @@ const AddProduct = () => {
             stockQuantity: v.stockQuantity,
             imageUrl: v.imageUrl || null
         }));
-        
+
         const imageFiles = variants.map(v => v.image).filter(Boolean);
 
         formData.append('product', new Blob([JSON.stringify(productData)], { type: 'application/json' }));
         formData.append('variants', new Blob([JSON.stringify(variantData)], { type: 'application/json' }));
-        
+
         imageFiles.forEach(imageFile => {
             formData.append('images', imageFile);
         });
@@ -187,9 +188,9 @@ const AddProduct = () => {
                 </div>
             </form>
             <Modal isOpen={isMediaModalOpen} onClose={closeMediaModal} title="Select Media" size="4xl">
-                 <div className="h-[70vh] overflow-y-auto p-1">
-                     <MediaManager mode="select" onSelect={handleSelectFromMedia} />
-                 </div>
+                <div className="h-[70vh] overflow-y-auto p-1">
+                    <MediaManager mode="select" onSelect={handleSelectFromMedia} />
+                </div>
             </Modal>
         </div>
     );

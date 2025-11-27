@@ -23,7 +23,7 @@ const UpdateProduct = () => {
     const [categories, setCategories] = useState([]);
     const [product, setProduct] = useState(null);
     const [variants, setVariants] = useState([]);
-    
+
     const [isMediaModalOpen, setIsMediaModalOpen] = useState(false);
     const [activeVariantIndex, setActiveVariantIndex] = useState(null);
 
@@ -35,7 +35,7 @@ const UpdateProduct = () => {
                     API.get(`/api/admin/products/${id}`),
                     API.get('/api/admin/categories/flat')
                 ]);
-                
+
                 const productData = productRes.data;
                 setProduct({
                     name: productData.name,
@@ -76,14 +76,15 @@ const UpdateProduct = () => {
         }
         setVariants(updatedVariants);
     };
-    
+
     const handleSelectFromMedia = (file) => {
         if (activeVariantIndex === null) return;
         const updatedVariants = [...variants];
         const variantToUpdate = { ...updatedVariants[activeVariantIndex] };
 
-        variantToUpdate.imageUrl = file.imageUrl;
-        variantToUpdate.clientImageUrl = `${VITE_API_BASE_URL}${file.imageUrl}`;
+        // MediaFile entity uses 'url' field, not 'imageUrl'
+        variantToUpdate.imageUrl = file.url;
+        variantToUpdate.clientImageUrl = `${VITE_API_BASE_URL}${file.url}`;
         variantToUpdate.image = null; // Clear file input if media is chosen
 
         updatedVariants[activeVariantIndex] = variantToUpdate;
@@ -115,7 +116,7 @@ const UpdateProduct = () => {
 
         const formData = new FormData();
         const productData = { ...product, category: { id: product.categoryId } };
-        
+
         // Separate variants and their image files
         const variantsData = variants.map(v => ({
             id: v.id,
@@ -128,7 +129,7 @@ const UpdateProduct = () => {
 
         formData.append('product', new Blob([JSON.stringify(productData)], { type: 'application/json' }));
         formData.append('variants', new Blob([JSON.stringify(variantsData)], { type: 'application/json' }));
-        
+
         // Append only newly uploaded image files
         variants.forEach(v => {
             if (v.image) {
@@ -174,28 +175,29 @@ const UpdateProduct = () => {
                     {variants.map((variant, index) => {
                         const previewUrl = variant.clientImageUrl || (variant.imageUrl ? `${VITE_API_BASE_URL}${variant.imageUrl}` : null);
                         return (
-                        <div key={variant.id || `new-${index}`} className="bg-white p-8 rounded-lg shadow-md relative">
-                            <h3 className="text-lg font-bold mb-6">Variant {index + 1}</h3>
-                            {variants.length > 1 && (
-                                <Button type="button" variant="ghost" className="absolute top-6 right-6" onClick={() => removeVariant(index)}><i className="bi bi-x-lg"></i></Button>
-                            )}
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <Input label="Color" name="color" value={variant.color} onChange={e => handleVariantChange(index, e)} required />
-                                <Input label="Size" name="size" value={variant.size} onChange={e => handleVariantChange(index, e)} required />
-                                <Input label="Price (EGP)" name="price" type="number" step="0.01" value={variant.price} onChange={e => handleVariantChange(index, e)} required />
-                                <Input label="Stock Quantity" name="stockQuantity" type="number" value={variant.stockQuantity} onChange={e => handleVariantChange(index, e)} required />
-                                <div className="md:col-span-2 grid grid-cols-3 gap-6 items-end">
-                                    <div className="col-span-2">
-                                        <Input label="Change Image (Optional)" name="image" type="file" onChange={e => handleVariantChange(index, e)} accept="image/*" />
-                                        <Button type="button" variant="outline" onClick={() => openMediaModal(index)} className="mt-2 text-sm">Or Choose from Media Library</Button>
+                            <div key={variant.id || `new-${index}`} className="bg-white p-8 rounded-lg shadow-md relative">
+                                <h3 className="text-lg font-bold mb-6">Variant {index + 1}</h3>
+                                {variants.length > 1 && (
+                                    <Button type="button" variant="ghost" className="absolute top-6 right-6" onClick={() => removeVariant(index)}><i className="bi bi-x-lg"></i></Button>
+                                )}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <Input label="Color" name="color" value={variant.color} onChange={e => handleVariantChange(index, e)} required />
+                                    <Input label="Size" name="size" value={variant.size} onChange={e => handleVariantChange(index, e)} required />
+                                    <Input label="Price (EGP)" name="price" type="number" step="0.01" value={variant.price} onChange={e => handleVariantChange(index, e)} required />
+                                    <Input label="Stock Quantity" name="stockQuantity" type="number" value={variant.stockQuantity} onChange={e => handleVariantChange(index, e)} required />
+                                    <div className="md:col-span-2 grid grid-cols-3 gap-6 items-end">
+                                        <div className="col-span-2">
+                                            <Input label="Change Image (Optional)" name="image" type="file" onChange={e => handleVariantChange(index, e)} accept="image/*" />
+                                            <Button type="button" variant="outline" onClick={() => openMediaModal(index)} className="mt-2 text-sm">Or Choose from Media Library</Button>
+                                        </div>
+                                        {previewUrl && (
+                                            <img src={previewUrl} alt="Preview" className="h-16 w-16 object-cover rounded-md" />
+                                        )}
                                     </div>
-                                    {previewUrl && (
-                                        <img src={previewUrl} alt="Preview" className="h-16 w-16 object-cover rounded-md" />
-                                    )}
                                 </div>
                             </div>
-                        </div>
-                    )})}
+                        )
+                    })}
                 </div>
 
                 <div className="mt-6 flex justify-between items-center">
@@ -209,9 +211,9 @@ const UpdateProduct = () => {
                 </div>
             </form>
             <Modal isOpen={isMediaModalOpen} onClose={closeMediaModal} title="Select Media" size="4xl">
-                 <div className="h-[70vh] overflow-y-auto p-1">
-                     <MediaManager mode="select" onSelect={handleSelectFromMedia} />
-                 </div>
+                <div className="h-[70vh] overflow-y-auto p-1">
+                    <MediaManager mode="select" onSelect={handleSelectFromMedia} />
+                </div>
             </Modal>
         </div>
     );
