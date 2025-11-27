@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react';
 const CategoryCard = ({ category }) => {
   const imageUrl = category?.imageUrl
     ? `${import.meta.env.VITE_API_BASE_URL}${category.imageUrl}`
-    : "";
+    : "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=800&auto=format&fit=crop";
 
   return (
     <Link
@@ -13,18 +13,12 @@ const CategoryCard = ({ category }) => {
     >
       {/* Background Image */}
       <div className="aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300">
-        {imageUrl ? (
-          <img
-            src={imageUrl}
-            alt={category?.name || 'Category'}
-            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-            loading="lazy"
-          />
-        ) : (
-          <div className="flex items-center justify-center h-full text-gray-400">
-            <span className="text-sm">No Image</span>
-          </div>
-        )}
+        <img
+          src={imageUrl}
+          alt={category?.name || 'Category'}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+          loading="lazy"
+        />
 
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:from-black/90 transition-all duration-500" />
