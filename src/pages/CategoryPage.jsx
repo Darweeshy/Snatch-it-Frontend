@@ -84,28 +84,11 @@ const CategoryPage = () => {
                 setAvailableSizes(sizesRes.data);
             } catch (error) {
                 toast.error("Could not load category details.");
-                setIsLoading(false);
-            }
-        };
-        fetchInitialData();
-    }, [categoryId]);
-
-    useEffect(() => {
-        if (category) {
-            fetchProducts(0);
-        }
-    }, [category, filters]);
-
-    const updateUrlParams = useCallback(debounce((newFilters) => {
-        const params = new URLSearchParams();
-        newFilters.subcategories.forEach(id => params.append('subcategory', id));
-        newFilters.brands.forEach(brand => params.append('brands', brand));
-        newFilters.sizes.forEach(size => params.append('sizes', size));
-        if (newFilters.minPrice) params.set('minPrice', newFilters.minPrice);
-        if (newFilters.maxPrice) params.set('maxPrice', newFilters.maxPrice);
-        if (newFilters.sort !== 'default') params.set('sort', newFilters.sort);
-        setSearchParams(params, { replace: true });
-    }, 300), [setSearchParams]);
+                if (newFilters.minPrice) params.set('minPrice', newFilters.minPrice);
+                if (newFilters.maxPrice) params.set('maxPrice', newFilters.maxPrice);
+                if (newFilters.sort !== 'default') params.set('sort', newFilters.sort);
+                setSearchParams(params, { replace: true });
+            }, 300), [setSearchParams]);
 
     useEffect(() => {
         updateUrlParams(filters);
