@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, Package } from 'lucide-react';
 
 const CategoryCard = ({ category }) => {
   const imageUrl = category?.imageUrl
@@ -9,10 +9,10 @@ const CategoryCard = ({ category }) => {
   return (
     <Link
       to={`/category/${category?.id}`}
-      className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 block"
+      className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 block touch-target"
     >
       {/* Background Image */}
-      <div className="aspect-[4/3] w-full overflow-hidden bg-gradient-to-br from-gray-200 to-gray-300">
+      <div className="aspect-category w-full overflow-hidden bg-gradient-to-br from-[var(--color-secondary-sand)] to-[var(--color-neutral-light)]">
         <img
           src={imageUrl}
           alt={category?.name || 'Category'}
@@ -20,13 +20,19 @@ const CategoryCard = ({ category }) => {
           loading="lazy"
         />
 
+        {/* Egyptian Pattern Overlay */}
+        <div className="absolute inset-0 egyptian-pattern opacity-30" />
+
         {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent group-hover:from-black/90 transition-all duration-500" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--color-primary-navy)]/90 via-[var(--color-primary-navy)]/50 to-transparent group-hover:from-[var(--color-primary-navy)]/95 transition-all duration-500" />
+
+        {/* Gold Accent Border on Hover */}
+        <div className="absolute inset-0 border-4 border-transparent group-hover:border-[var(--color-primary-gold)]/30 transition-all duration-500 rounded-2xl" />
       </div>
 
       {/* Content */}
       <div className="absolute bottom-0 left-0 right-0 p-6">
-        <h3 className="text-2xl font-bold text-white mb-2 group-hover:translate-x-2 transition-transform duration-300">
+        <h3 className="text-2xl md:text-3xl font-bold text-white mb-2 group-hover:translate-x-2 transition-transform duration-300 font-['Cairo']">
           {category?.name || 'Unnamed Category'}
         </h3>
 
@@ -36,21 +42,29 @@ const CategoryCard = ({ category }) => {
           </p>
         )}
 
-        {/* Shop Now Button */}
-        <div className="flex items-center text-white font-semibold group-hover:text-[#EF8354] transition-colors duration-300">
-          <span>Shop Now</span>
+        {/* Shop Now Button with Egyptian Styling */}
+        <div className="flex items-center text-white font-semibold group-hover:text-[var(--color-primary-gold)] transition-colors duration-300">
+          <span className="text-sm md:text-base">Explore Collection</span>
           <ChevronRight className="w-5 h-5 ml-1 group-hover:translate-x-2 transition-transform duration-300" />
         </div>
       </div>
 
-      {/* Product Count Badge (if available) */}
+      {/* Product Count Badge - Egyptian Gold */}
       {category?.productCount > 0 && (
-        <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full shadow-lg">
-          <span className="text-xs font-bold text-gray-900">
-            {category.productCount} {category.productCount === 1 ? 'Item' : 'Items'}
-          </span>
+        <div className="absolute top-4 right-4 bg-[var(--color-primary-gold)]/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border-2 border-white/20">
+          <div className="flex items-center gap-2">
+            <Package className="w-4 h-4 text-[var(--color-primary-navy)]" />
+            <span className="text-xs font-bold text-[var(--color-primary-navy)]">
+              {category.productCount} {category.productCount === 1 ? 'Item' : 'Items'}
+            </span>
+          </div>
         </div>
       )}
+
+      {/* Corner Accent - Egyptian Style */}
+      <div className="absolute top-0 left-0 w-16 h-16 overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full bg-[var(--color-primary-teal)]/20 transform -rotate-45 translate-x-[-50%] translate-y-[-50%] group-hover:bg-[var(--color-primary-gold)]/30 transition-colors duration-500" />
+      </div>
     </Link>
   );
 };

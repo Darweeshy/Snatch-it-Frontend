@@ -10,7 +10,7 @@ const Input = React.forwardRef(({ type = 'text', name, id, label, placeholder, c
         id={id || name}
         ref={ref}
         placeholder={placeholder}
-        className={`block w-full rounded-md border-secondary-300 shadow-sm focus:border-primary-500 focus:ring-primary-500 sm:text-sm ${className} ${error ? 'border-red-500' : ''}`}
+        className={`input-field ${error ? 'input-error' : ''} ${className}`}
         {...props}
       />
       {error && <p className="mt-1 text-sm text-red-600">{error}</p>}

@@ -12,11 +12,18 @@ const Register = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        if (password !== confirmPassword) {
+            toast.error("Passwords do not match!");
+            return;
+        }
+
         setIsLoading(true);
         try {
             await API.post('/api/register', { username, email, password, role: 'ROLE_USER' });
@@ -38,28 +45,43 @@ const Register = () => {
                 <div className="bg-white p-8 rounded-lg shadow-md">
                     <h2 className="text-2xl font-bold text-center text-secondary-900 mb-6">Create an Account</h2>
                     <form onSubmit={handleSubmit} className="space-y-6">
-                        <Input 
-                            label="Username" 
-                            id="username" 
-                            type="text" 
-                            value={username} 
-                            onChange={e => setUsername(e.target.value)} 
+                        <Input
+                            label="Username"
+                            id="username"
+                            type="text"
+                            value={username}
+                            onChange={e => setUsername(e.target.value)}
+                            required
+                            minLength={3}
+                            maxLength={20}
+                        />
+                        <Input
+                            label="Email"
+                            id="email"
+                            type="email"
+                            value={email}
+                            onChange={e => setEmail(e.target.value)}
                             required
                         />
-                        <Input 
-                            label="Email" 
-                            id="email" 
-                            type="email" 
-                            value={email} 
-                            onChange={e => setEmail(e.target.value)} 
-                            required
-                        />
-                        <Input 
-                            label="Password" 
-                            id="password" 
-                            type="password" 
-                            value={password} 
-                            onChange={e => setPassword(e.target.value)} 
+                        <div>
+                            <Input
+                                label="Password"
+                                id="password"
+                                type="password"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                required
+                            />
+                            <p className="text-xs text-secondary-500 mt-1">
+                                Must be at least 8 characters with uppercase, lowercase, and number.
+                            </p>
+                        </div>
+                        <Input
+                            label="Confirm Password"
+                            id="confirmPassword"
+                            type="password"
+                            value={confirmPassword}
+                            onChange={e => setConfirmPassword(e.target.value)}
                             required
                         />
                         <Button type="submit" className="w-full py-3" disabled={isLoading}>

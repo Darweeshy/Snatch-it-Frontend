@@ -2,14 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @layer base {
     :root {
-        --color-primary: #2D3142;
+        /* Egyptian-Inspired Primary Colors */
+        --color-primary-navy: #1a2332;
+        --color-primary-teal: #00a8a8;
+        --color-primary-gold: #d4af37;
+
+        /* Secondary Colors */
+        --color-secondary-sand: #f5f1e8;
+        --color-secondary-terracotta: #e07a5f;
+        --color-secondary-olive: #81b29a;
+
+        /* Neutral Colors */
+        --color-neutral-white: #ffffff;
+        --color-neutral-light: #f8f9fa;
+        --color-neutral-gray: #6c757d;
+        --color-neutral-dark: #212529;
+
+        /* Accent Colors */
+        --color-accent-turquoise: #06d6a0;
+        --color-accent-coral: #ff6b6b;
+
+        /* Functional Colors */
+        --color-success: #81b29a;
+        --color-warning: #f4a261;
+        --color-error: #e76f51;
+        --color-info: #00a8a8;
+
+        /* Legacy support (keeping for backward compatibility) */
+        --color-primary: #1a2332;
         --color-secondary: #4F5D75;
-        --color-accent: #EF8354;
-        --color-success: #10B981;
-        --color-warning: #F59E0B;
-        --color-danger: #EF4444;
+        --color-accent: #00a8a8;
     }
 
     * {
@@ -17,18 +44,91 @@
     }
 
     body {
-        @apply antialiased;
-        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        @apply antialiased bg-neutral-light text-neutral-dark;
+        font-family: 'Inter', 'Cairo', system-ui, -apple-system, sans-serif;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-family: 'Cairo', 'Inter', sans-serif;
+        @apply font-bold;
+    }
+}
+
+@layer components {
+
+    /* Button Styles */
+    .btn-primary {
+        @apply bg-[var(--color-primary-teal)] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-[var(--color-accent-turquoise)] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+    }
+
+    .btn-secondary {
+        @apply bg-[var(--color-secondary-terracotta)] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-[#d66a50] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+    }
+
+    .btn-outline {
+        @apply border-2 border-[var(--color-primary-teal)] text-[var(--color-primary-teal)] px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-[var(--color-primary-teal)] hover:text-white hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+    }
+
+    .btn-gold {
+        @apply bg-[var(--color-primary-gold)] text-[var(--color-primary-navy)] px-6 py-3 rounded-lg font-bold transition-all duration-300 hover:bg-[#c49d2e] hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0;
+    }
+
+    /* Card Styles */
+    .card {
+        @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300;
+    }
+
+    .card-egyptian {
+        @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border-l-4 border-[var(--color-primary-gold)];
+    }
+
+    /* Input Styles */
+    .input-field {
+        @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-[var(--color-primary-teal)] focus:ring-2 focus:ring-[var(--color-primary-teal)]/20 outline-none transition-all duration-200;
+    }
+
+    .input-error {
+        @apply border-[var(--color-error)] focus:border-[var(--color-error)] focus:ring-[var(--color-error)]/20;
+    }
+
+    /* Badge Styles */
+    .badge {
+        @apply inline-block px-3 py-1 rounded-full text-sm font-semibold;
+    }
+
+    .badge-success {
+        @apply bg-[var(--color-success)]/20 text-[var(--color-success)];
+    }
+
+    .badge-warning {
+        @apply bg-[var(--color-warning)]/20 text-[var(--color-warning)];
+    }
+
+    .badge-error {
+        @apply bg-[var(--color-error)]/20 text-[var(--color-error)];
+    }
+
+    /* Egyptian Pattern Overlay */
+    .egyptian-pattern {
+        background-image:
+            repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.03) 10px, rgba(212, 175, 55, 0.03) 20px);
     }
 }
 
 @layer utilities {
+
     /* Animations */
     @keyframes fade-in-up {
         from {
             opacity: 0;
             transform: translateY(20px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -39,6 +139,7 @@
         from {
             opacity: 0;
         }
+
         to {
             opacity: 1;
         }
@@ -48,6 +149,17 @@
         from {
             transform: translateX(100%);
         }
+
+        to {
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes slide-in-left {
+        from {
+            transform: translateX(-100%);
+        }
+
         to {
             transform: translateX(0);
         }
@@ -57,8 +169,21 @@
         0% {
             background-position: -1000px 0;
         }
+
         100% {
             background-position: 1000px 0;
+        }
+    }
+
+    @keyframes pulse-glow {
+
+        0%,
+        100% {
+            box-shadow: 0 0 20px rgba(0, 168, 168, 0.3);
+        }
+
+        50% {
+            box-shadow: 0 0 30px rgba(0, 168, 168, 0.6);
         }
     }
 
@@ -72,6 +197,14 @@
 
     .animate-slide-in-right {
         animation: slide-in-right 0.3s ease-out forwards;
+    }
+
+    .animate-slide-in-left {
+        animation: slide-in-left 0.3s ease-out forwards;
+    }
+
+    .animate-pulse-glow {
+        animation: pulse-glow 2s ease-in-out infinite;
     }
 
     .animation-delay-200 {
@@ -91,9 +224,17 @@
         @apply bg-white/10 backdrop-blur-lg border border-white/20;
     }
 
+    .glass-dark {
+        @apply bg-black/10 backdrop-blur-lg border border-black/20;
+    }
+
     /* Gradient text */
     .gradient-text {
-        @apply bg-gradient-to-r from-[#EF8354] to-[#F4A261] bg-clip-text text-transparent;
+        @apply bg-gradient-to-r from-[var(--color-primary-teal)] to-[var(--color-accent-turquoise)] bg-clip-text text-transparent;
+    }
+
+    .gradient-text-gold {
+        @apply bg-gradient-to-r from-[var(--color-primary-gold)] to-[#f4d03f] bg-clip-text text-transparent;
     }
 
     /* Smooth hover lift */
@@ -103,12 +244,17 @@
 
     /* Shadow glow */
     .shadow-glow {
-        box-shadow: 0 10px 40px rgba(239, 131, 84, 0.3);
+        box-shadow: 0 10px 40px rgba(0, 168, 168, 0.3);
+    }
+
+    .shadow-glow-gold {
+        box-shadow: 0 10px 40px rgba(212, 175, 55, 0.3);
     }
 
     /* Custom scrollbar */
     .custom-scrollbar::-webkit-scrollbar {
         width: 8px;
+        height: 8px;
     }
 
     .custom-scrollbar::-webkit-scrollbar-track {
@@ -116,6 +262,79 @@
     }
 
     .custom-scrollbar::-webkit-scrollbar-thumb {
-        @apply bg-gray-300 rounded-full hover:bg-gray-400;
+        @apply bg-[var(--color-primary-teal)]/40 rounded-full hover:bg-[var(--color-primary-teal)]/60;
+    }
+
+    /* Touch-friendly minimum sizes */
+    .touch-target {
+        @apply min-h-[44px] min-w-[44px];
+    }
+
+    /* Mobile-specific utilities */
+    @media (max-width: 768px) {
+        .mobile-full {
+            @apply w-full;
+        }
+
+        .mobile-text-center {
+            @apply text-center;
+        }
+
+        .mobile-hidden {
+            @apply hidden;
+        }
+    }
+
+    /* Egyptian-inspired gradients */
+    .bg-egyptian-sunset {
+        background: linear-gradient(135deg, #e07a5f 0%, #f4a261 50%, #d4af37 100%);
+    }
+
+    .bg-egyptian-ocean {
+        background: linear-gradient(135deg, #1a2332 0%, #00a8a8 50%, #06d6a0 100%);
+    }
+
+    .bg-egyptian-sand {
+        background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc4 100%);
+    }
+
+    /* Text utilities */
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    /* Aspect ratio utilities */
+    .aspect-product {
+        aspect-ratio: 3 / 4;
+    }
+
+    .aspect-category {
+        aspect-ratio: 4 / 3;
+    }
+
+    .aspect-banner {
+        aspect-ratio: 16 / 9;
+    }
+}
+
+/* Responsive Typography */
+@media (max-width: 640px) {
+    h1 {
+        @apply text-3xl;
+    }
+
+    h2 {
+        @apply text-2xl;
+    }
+
+    h3 {
+        @apply text-xl;
+    }
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none !important;
     }
 }
