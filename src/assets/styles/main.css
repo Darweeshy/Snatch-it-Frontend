@@ -63,19 +63,19 @@
 
     /* Button Styles */
     .btn-primary {
-        @apply bg-[var(--color-primary-teal)] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-[var(--color-accent-turquoise)] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+        @apply bg-primary-teal text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-accent-turquoise hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
     }
 
     .btn-secondary {
-        @apply bg-[var(--color-secondary-terracotta)] text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-[#d66a50] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+        @apply bg-secondary-terracotta text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-[#d66a50] hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
     }
 
     .btn-outline {
-        @apply border-2 border-[var(--color-primary-teal)] text-[var(--color-primary-teal)] px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-[var(--color-primary-teal)] hover:text-white hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
+        @apply border-2 border-primary-teal text-primary-teal px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-primary-teal hover:text-white hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0;
     }
 
     .btn-gold {
-        @apply bg-[var(--color-primary-gold)] text-[var(--color-primary-navy)] px-6 py-3 rounded-lg font-bold transition-all duration-300 hover:bg-[#c49d2e] hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0;
+        @apply bg-primary-gold text-primary-navy px-6 py-3 rounded-lg font-bold transition-all duration-300 hover:bg-[#c49d2e] hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0;
     }
 
     /* Card Styles */
@@ -84,16 +84,16 @@
     }
 
     .card-egyptian {
-        @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border-l-4 border-[var(--color-primary-gold)];
+        @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border-l-4 border-primary-gold;
     }
 
     /* Input Styles */
     .input-field {
-        @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-[var(--color-primary-teal)] focus:ring-2 focus:ring-[var(--color-primary-teal)]/20 outline-none transition-all duration-200;
+        @apply w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-primary-teal focus:ring-2 focus:ring-primary-teal/20 outline-none transition-all duration-200;
     }
 
     .input-error {
-        @apply border-[var(--color-error)] focus:border-[var(--color-error)] focus:ring-[var(--color-error)]/20;
+        @apply border-error focus:border-error focus:ring-error/20;
     }
 
     /* Badge Styles */
@@ -102,15 +102,15 @@
     }
 
     .badge-success {
-        @apply bg-[var(--color-success)]/20 text-[var(--color-success)];
+        @apply bg-success/20 text-success;
     }
 
     .badge-warning {
-        @apply bg-[var(--color-warning)]/20 text-[var(--color-warning)];
+        @apply bg-warning/20 text-warning;
     }
 
     .badge-error {
-        @apply bg-[var(--color-error)]/20 text-[var(--color-error)];
+        @apply bg-error/20 text-error;
     }
 
     /* Egyptian Pattern Overlay */
