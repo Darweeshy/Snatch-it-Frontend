@@ -9,7 +9,7 @@ const AdminLayout = () => {
     <div className="flex h-screen bg-secondary-100">
       <aside className="w-64 flex-shrink-0 bg-secondary-800 p-4">
         <div className="flex items-center mb-8">
-          <a href="/" className="text-white font-bold text-2xl">Snatch It.</a>
+          <a href="/" className="text-white font-bold text-2xl">Snatch Up</a>
           <span className="ml-2 text-xs font-semibold uppercase text-primary-400">Admin</span>
         </div>
         <nav className="space-y-2">
@@ -29,7 +29,7 @@ const AdminLayout = () => {
             <i className="bi bi-receipt-cutoff mr-3"></i>
             Orders
           </NavLink>
-           <NavLink to="/admin/coupons" className={({ isActive }) => `${navLinkClasses} ${isActive ? activeClass : inactiveClass}`}>
+          <NavLink to="/admin/coupons" className={({ isActive }) => `${navLinkClasses} ${isActive ? activeClass : inactiveClass}`}>
             <i className="bi bi-tag-fill mr-3"></i>
             Coupons
           </NavLink>

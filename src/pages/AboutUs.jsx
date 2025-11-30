@@ -4,12 +4,12 @@ import PageHeader from "../components/shared/PageHeader";
 const AboutUs = () => {
     return (
         <Container className="py-12">
-            <PageHeader 
-              title="About Snatch It"
+            <PageHeader
+                title="About Snatch Up"
             />
             <div className="prose prose-lg max-w-4xl mx-auto text-secondary-600">
                 <p>
-                    Welcome to Snatch It, your new go-to for high-quality, affordable athletic wear.
+                    Welcome to Snatch Up, your new go-to for high-quality, affordable athletic wear.
                 </p>
                 <p>
                     We're a group of engineers in our mid-20s who share a passion for working out. For years, we faced the same frustrating problem: finding great athletic apparel that didn't break the bank. It seemed like you had to choose between overpriced, big-name brands and cheap, low-quality gear that wouldn't last a single deadlift session.
